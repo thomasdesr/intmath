@@ -1,5 +1,8 @@
 TODO: 
 
-- Decide how to deal with overflow. One possible option: make result equal to results of standard math package. This might get strange results though, see: http://play.golang.org/p/Bs2ioK8Rid
+- Decide how to deal with overflow. 
+  One possible option: make result equal to results of standard math package. 
+  This might get strange results though, see: http://play.golang.org/p/Bs2ioK8Rid
 
-- Decide which functions should be implemented (for example, do Sin and Cos make sense in a non-FPM integer context?)
+- Decide which functions should be implemented (for example, do Sin and Cos make 
+  sense in a non-FPM integer context?)
