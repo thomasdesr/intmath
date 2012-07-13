@@ -7,5 +7,6 @@
 // Min(x, y)
 // Max(x, y)
 // Pow(x, y)
-// Log2(n))
+// Sqrt(x)
+// Log2(n)
 package intmath
