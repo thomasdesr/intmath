@@ -8,7 +8,7 @@ func Log2(n int64) int64 {
 	}
 	for i := uint(56); i >= 0; i -= 8 {
 		if n>>i > 0 {
-			for ; ; i++ {
+			for i++; ; i++ {
 				if n>>i == 0 {
 					return int64(i)
 				}
