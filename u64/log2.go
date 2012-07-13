@@ -5,7 +5,7 @@ package u64
 func Log2(n uint64) uint64 {
 	for i := uint64(56); i >= 0; i -= 8 {
 		if n>>i > 0 {
-			for ; ; i++ {
+			for i++; ; i++ {
 				if n>>i == 0 {
 					return i
 				}

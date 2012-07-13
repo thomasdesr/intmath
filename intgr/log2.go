@@ -6,23 +6,17 @@ func Log2(n int) int {
 	if n <= 0 {
 		return -1
 	}
+	var i uint
 	if n<<32 == 0 {
-		for i := uint(24); i >= 0; i -= 8 {
-			if n>>i > 0 {
-				for ; ; i++ {
-					if n>>i == 0 {
-						return int(i)
-					}
-				}
-			}
-		}
+		i = 24
 	} else {
-		for i := uint(56); i >= 0; i -= 8 {
-			if n>>i > 0 {
-				for ; ; i++ {
-					if n>>i == 0 {
-						return int(i)
-					}
+		i = 56
+	}
+	for ; i >= 0; i -= 8 {
+		if n>>i > 0 {
+			for i++; ; i++ {
+				if n>>i == 0 {
+					return int(i)
 				}
 			}
 		}

@@ -8,7 +8,7 @@ func Log2(n int32) int32 {
 	}
 	for i := uint32(24); i >= 0; i -= 8 {
 		if n>>i > 0 {
-			for ; ; i++ {
+			for i++; ; i++ {
 				if n>>i == 0 {
 					return int32(i)
 				}
