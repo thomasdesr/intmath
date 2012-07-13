@@ -14,7 +14,7 @@ func Pow(x, y int) int {
 	if x == 0 || y < 0 {
 		return 0
 	}
-	r := int32(1)
+	r := 1
 	for y > 0 {
 		if y%2 == 0 {
 			r *= x

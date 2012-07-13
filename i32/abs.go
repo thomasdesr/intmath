@@ -4,8 +4,4 @@ package i32
 func Abs(x int32) int32 {
 	// Code adapted from https://bitbucket.org/SyntaxK/imath/src
 	return x ^ x>>31 - x>>31
-	// if x < 0 {
-	//	return -x
-	// }
-	//return x
 }

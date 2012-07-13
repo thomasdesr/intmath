@@ -6,9 +6,14 @@ func Log2(n int64) int64 {
 	if n <= 0 {
 		return -1
 	}
-	for i := int64(1); ; i++ {
-		if n>>i == 0 {
-			return i
+	for i := uint(56); i >= 0; i -= 8 {
+		if n>>i > 0 {
+			for ; ; i++ {
+				if n>>i == 0 {
+					return int64(i)
+				}
+			}
 		}
 	}
+	return -1
 }

@@ -7,12 +7,18 @@ func Sqrt(x int) (r int) {
 	if x < 0 {
 		return -1
 	}
+
+	// Check if int is 32 or 64 bits
 	// p starts at the highest power of four less or equal to x
 	p := 1
-	for p < x {
-		p <<= 2
+	if x<<32 == 0 {
+		p <<= 30
+	} else {
+		p <<= 62
 	}
-	p >>= 2
+	for p > x {
+		p >>= 2
+	}
 
 	for p != 0 {
 		if x >= r+p {
@@ -22,4 +28,5 @@ func Sqrt(x int) (r int) {
 		r >>= 1
 		p >>= 2
 	}
+	return
 }

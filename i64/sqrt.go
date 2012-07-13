@@ -8,8 +8,10 @@ func Sqrt(x int64) (r int64) {
 		return -1
 	}
 	// p starts at the highest power of four less or equal to x
-	p := 1 << 62
-	p >>= 2
+	p := int64(1 << 62)
+	for p > x {
+		p >>= 2
+	}
 
 	for p != 0 {
 		if x >= r+p {
@@ -19,4 +21,5 @@ func Sqrt(x int64) (r int64) {
 		r >>= 1
 		p >>= 2
 	}
+	return
 }
