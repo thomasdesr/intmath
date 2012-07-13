@@ -58,7 +58,7 @@ func BenchmarkExpInt32(b *testing.B) {
 
 }
 
-// Using the standard Math package exp function and casting from/to int64
+// Using the standard Math package exp function and casting from/to int32
 func BenchmarkExpFloat64ToInt32(b *testing.B) {
 	for i := 0; i < b.N; i++ {
 		for j := int32(0); j < 15; j++ {
