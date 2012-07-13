@@ -1,4 +1,4 @@
-package intg
+package intgr
 
 // Abs returns the absolute value of x.
 func Abs(x int) int {

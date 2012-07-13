@@ -5,7 +5,7 @@ package u32
 // http://www.codecodex.com/wiki/Calculate_an_integer_square_root#C
 func Sqrt(x uint32) (r uint32) {
 	// p starts at the highest power of four less or equal to x
-	p := 1 << 30
+	p := uint32(1 << 30)
 	for p > x {
 		p >>= 2
 	}
@@ -18,4 +18,5 @@ func Sqrt(x uint32) (r uint32) {
 		r >>= 1
 		p >>= 2
 	}
+	return
 }
