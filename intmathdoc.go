@@ -33,15 +33,15 @@
 // of the library, so functions in u64 only take and return uint64. 
 // Compare the following hypothetical library:
 //
-// c := intmath.Pow(a, b)
-// k := intMath.PowUint32(i, j)
-// z := intmath.PowUint64(x,y)
+//  c := intmath.Pow(a, b)
+//  k := intMath.PowUint32(i, j)
+//  z := intmath.PowUint64(x,y)
 //
 // to the notation here:
 //
-// c := intgr.Pow(a, b)
-// k := u32.Pow(i, j)
-// z := u64.Pow(x, y)
+//  c := intgr.Pow(a, b)
+//  k := u32.Pow(i, j)
+//  z := u64.Pow(x, y)
 //
 // Note that in the latter case it is immediatly clear what the types
 // of k, z and c are, while being less verbose at the same time.
