@@ -14,8 +14,8 @@ func Log2(n int) int {
 	}
 	for ; i >= 0; i -= 8 {
 		if n>>i > 0 {
-			for i++; ; i++ {
-				if n>>i == 0 {
+			for ; ; i++ {
+				if n>>i == 1 {
 					return int(i)
 				}
 			}
