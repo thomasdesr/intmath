@@ -5,8 +5,8 @@ package u32
 func Log2(n uint32) uint32 {
 	for i := uint32(24); i >= 0; i -= 8 {
 		if n>>i > 0 {
-			for i++; ; i++ {
-				if n>>i == 0 {
+			for ; ; i++ {
+				if n>>i == 1 {
 					return i
 				}
 			}

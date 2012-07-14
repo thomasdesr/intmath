@@ -5,7 +5,7 @@ package u64
 // http://www.codecodex.com/wiki/Calculate_an_integer_square_root#C
 func Sqrt(x uint64) (r uint64) {
 	// p starts at the highest power of four less or equal to x
-	p := 1 << 62
+	p := uint64(1 << 62)
 	for p > x {
 		p >>= 2
 	}
@@ -18,4 +18,5 @@ func Sqrt(x uint64) (r uint64) {
 		r >>= 1
 		p >>= 2
 	}
+	return
 }
