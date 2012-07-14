@@ -10,7 +10,7 @@ func Pow(x, y uint32) uint32 {
 	}
 	r := uint32(1)
 	for y > 0 {
-		if y%2 == 0 {
+		if y%2 == 1 {
 			r *= x
 		}
 		x *= x
