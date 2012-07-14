@@ -1,7 +1,6 @@
 package intmath
 
 import (
-	"fmt"
 	"intmath/i32"
 	"intmath/i64"
 	"intmath/intgr"
@@ -90,45 +89,39 @@ func TestLog2(t *testing.T) {
 	}
 	for i := 0; i < iMax; i++ {
 		if intgr.Log2(1<<uint(i)) != i {
-			fmt.Printf("FAIL:\tintgr.Log2(1<<i) != i:\n")
-			fmt.Printf("\t%v == %v\n", intgr.Log2(1<<uint(i)), i)
+			t.Logf("intgr.Log2(1<<%v) == %v\n", i, intgr.Log2(1<<uint(i)))
 			t.FailNow()
 		}
 	}
 
 	for i := uint(0); i < uint(iMax); i++ {
 		if uintgr.Log2(1<<i) != i {
-			fmt.Printf("FAIL:\tuintgr.Log2(1<<i) != i:\n")
-			fmt.Printf("\t%v == %v\n", uintgr.Log2(1<<uint(i)), i)
-			t.FailNow()
+			t.Logf("uintgr.Log2(1<<%v) == %v\n", i, uintgr.Log2(1<<uint(i)))
+			t.Fail()
 		}
 	}
 	for i := int32(0); i < 31; i++ {
 		if i32.Log2(1<<uint(i)) != i {
-			fmt.Printf("FAIL:\ti32.Log2(1<<i) != i:\n")
-			fmt.Printf("\t%v == %v\n", i32.Log2(1<<uint(i)), i)
-			t.FailNow()
+			t.Logf("i32.Log2(1<<%v) == %v\n", i, i32.Log2(1<<uint(i)))
+			t.Fail()
 		}
 	}
 	for i := int64(0); i < 63; i++ {
 		if i64.Log2(1<<uint(i)) != i {
-			fmt.Printf("FAIL:\ti64.Log2(1<<i) != i:\n")
-			fmt.Printf("\t%v == %v\n", i64.Log2(1<<uint(i)), i)
-			t.FailNow()
+			t.Logf("i64.Log2(1<<%v) == %v\n", i, i64.Log2(1<<uint(i)))
+			t.Fail()
 		}
 	}
 	for i := uint32(0); i < 32; i++ {
 		if u32.Log2(1<<uint(i)) != i {
-			fmt.Printf("FAIL:\tu32.Log2(1<<i) != i:\n")
-			fmt.Printf("\t%v == %v\n", u32.Log2(1<<uint(i)), i)
-			t.FailNow()
+			t.Logf("u32.Log2(1<<%v) == %v\n", i, u32.Log2(1<<uint(i)))
+			t.Fail()
 		}
 	}
 	for i := uint64(0); i < 64; i++ {
 		if u64.Log2(1<<uint(i)) != i {
-			fmt.Printf("FAIL:\tu64.Log2(1<<i) != i:\n")
-			fmt.Printf("\t%v == %v\n", u64.Log2(1<<uint(i)), i)
-			t.FailNow()
+			t.Logf("u64.Log2(1<<%v) != %v\n", i, u64.Log2(1<<uint(i)))
+			t.Fail()
 		}
 	}
 }
@@ -152,38 +145,38 @@ func TestSqrt(t *testing.T) {
 
 	for i := iMax; i > 0; i >>= 1 {
 		if intgr.Sqrt(i*i) != i {
-			fmt.Printf("FAIL: \tintgr.Sqrt(%X*%X) == %X\n", i, i, intgr.Sqrt(i))
-			t.FailNow()
+			t.Logf("intgr.Sqrt(%X*%X) == %X\n", i, i, intgr.Sqrt(i))
+			t.Fail()
 		}
 	}
 	for i := uMax; i > 0; i >>= 1 {
 		if uintgr.Sqrt(i*i) != i {
-			fmt.Printf("FAIL: \tuintgr.Sqrt(%X*%X) == %X\n", i, i, uintgr.Sqrt(i))
-			t.FailNow()
+			t.Logf("uintgr.Sqrt(%X*%X) == %X\n", i, i, uintgr.Sqrt(i))
+			t.Fail()
 		}
 	}
 	for i := i32Max; i > 0; i >>= 1 {
 		if i32.Sqrt(i*i) != i {
-			fmt.Printf("FAIL: \ti32.Sqrt(%X*%X) == %X\n", i, i, i32.Sqrt(i))
-			t.FailNow()
+			t.Logf("i32.Sqrt(%X*%X) == %X\n", i, i, i32.Sqrt(i))
+			t.Fail()
 		}
 	}
 	for i := u32Max; i > 0; i >>= 1 {
 		if u32.Sqrt(i*i) != i {
-			fmt.Printf("FAIL: \tu32.Sqrt(%X*%X) == %X\n", i, i, u32.Sqrt(i))
-			t.FailNow()
+			t.Logf("u32.Sqrt(%X*%X) == %X\n", i, i, u32.Sqrt(i))
+			t.Fail()
 		}
 	}
 	for i := i64Max; i > 0; i >>= 1 {
 		if i64.Sqrt(i*i) != i {
-			fmt.Printf("FAIL: \ti64.Sqrt(%X*%X) == %X\n", i, i, i64.Sqrt(i))
-			t.FailNow()
+			t.Logf("i64.Sqrt(%X*%X) == %X\n", i, i, i64.Sqrt(i))
+			t.Fail()
 		}
 	}
 	for i := u64Max; i > 0; i >>= 1 {
 		if u64.Sqrt(i*i) != i {
-			fmt.Printf("FAIL: \tu64.Sqrt(%X*%X) == %X\n", i, i, u64.Sqrt(i))
-			t.FailNow()
+			t.Logf("u64.Sqrt(%X*%X) == %X\n", i, i, u64.Sqrt(i))
+			t.Fail()
 		}
 	}
 }
