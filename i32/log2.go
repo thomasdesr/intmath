@@ -6,14 +6,22 @@ func Log2(n int32) int32 {
 	if n <= 0 {
 		return -1
 	}
-	for i := uint32(24); i >= 0; i -= 8 {
-		if n>>i > 0 {
-			for ; ; i++ {
-				if n>>i == 1 {
-					return int32(i)
-				}
-			}
-		}
+	if n >= 1<<16 {
+		r += 16
+		n >>= 16
 	}
-	return -1
+	if n >= 1<<8 {
+		r += 8
+		n >>= 8
+	}
+	if n >= 1<<4 {
+		r += 4
+		n >>= 4
+	}
+	if n >= 1<<2 {
+		r += 2
+		n >>= 2
+	}
+	r += n >> 1
+	return
 }

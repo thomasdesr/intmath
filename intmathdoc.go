@@ -14,7 +14,8 @@
 // this for yourself.
 //
 // Not all math functions will be copied, as not all of them make 
-// sense in this context. At the moment, the following functions have been implemented:
+// sense in an integer math context. At the moment, the following 
+// functions have been implemented:
 //
 //  Abs(x)     (only for signed types, obviously)
 //  GCD(a, b)  (adapted from github.com/cznic/mathutil)
@@ -29,12 +30,20 @@
 // the relevant type to use math functions tailored to that type.
 //
 // As a rule, all functions take and return types matching the type
-// of the library, so functions in u64 only takes and returns uint64. 
-// This both reduces verbosity and avoids the need for functions that 
-// explicitly name the type they apply to. This makes it easy to 
-// understand what code like this is doing:
-// 
+// of the library, so functions in u64 only take and return uint64. 
+// Compare the following hypothetical library:
+//
+// c := intmath.Pow(a, b)
+// k := intMath.PowUint32(i, j)
+// z := intmath.PowUint64(x,y)
+//
+// to the notation here:
+//
+// c := intgr.Pow(a, b)
+// k := u32.Pow(i, j)
 // z := u64.Pow(x, y)
 //
-// Think of it as fake function overloading.
+// Note that in the latter case it is immediatly clear what the types
+// of k, z and c are, while being less verbose at the same time.
+// Think of it as a fake function overloading.
 package intmath
