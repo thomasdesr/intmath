@@ -23,7 +23,8 @@
 //  Max(x, y)
 //  Pow(x, y)
 //  Sqrt(x)
-//  Log2(n)
+//  Log2(n)    (adapted from http://graphics.stanford.edu/~seander/bithacks.html)
+//  Log10(n)   (adapted from http://graphics.stanford.edu/~seander/bithacks.html)
 //
 // The intmath package itself is just a dummy package used for
 // documentation - the real library is in the subpackages. Import
@@ -35,7 +36,7 @@
 //
 //  c := intmath.Pow(a, b)
 //  k := intMath.PowUint32(i, j)
-//  z := intmath.PowUint64(x,y)
+//  z := intmath.PowUint64(x, y)
 //
 // to the notation here:
 //

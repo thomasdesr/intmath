@@ -16,7 +16,7 @@ func Pow(x, y int64) int64 {
 	}
 	r := int64(1)
 	for y > 0 {
-		if y%2 == 0 {
+		if y%2 == 1 {
 			r *= x
 		}
 		x *= x
