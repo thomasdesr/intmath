@@ -24,7 +24,6 @@ func Sqrt(x uint) (r uint) {
 		b += 4
 	}
 	if p >= 1<<2 {
-		p >>= 2
 		b += 2
 	}
 	p = 1 << b

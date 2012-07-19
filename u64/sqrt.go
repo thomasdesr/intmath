@@ -8,11 +8,11 @@ func Sqrt(x uint64) (r uint64) {
 	//Fast way to make p highest power of 4 <= x
 	p := x
 	var n, v uint
-	if p < 1<<32 {
-		v = uint(p)
-	} else {
+	if p >= 1<<32 {
 		v = uint(p >> 32)
 		n = 32
+	} else {
+		v = uint(p)
 	}
 
 	if v >= 1<<16 {
@@ -28,7 +28,6 @@ func Sqrt(x uint64) (r uint64) {
 		n += 4
 	}
 	if v >= 1<<2 {
-		v >>= 2
 		n += 2
 	}
 	p = 1 << n
