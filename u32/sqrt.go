@@ -22,7 +22,6 @@ func Sqrt(x uint32) uint32 {
 		b += 4
 	}
 	if p >= 1<<2 {
-		p >>= 2
 		b += 2
 	}
 	p = 1 << b

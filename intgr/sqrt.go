@@ -28,7 +28,6 @@ func Sqrt(x int) (r int) {
 		n += 4
 	}
 	if p >= 1<<2 {
-		p >>= 2
 		n += 2
 	}
 	p = 1 << n
