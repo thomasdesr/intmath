@@ -1,15 +1,15 @@
 package i32
 
-// Crt returns the integer cube root of n. That is to say, the r such that:
+// Cbrt returns the integer cube root of n. That is to say, the r such that:
 //
 // r * r * r <= n && n < (r + 1) * (r + 1) * (r + 1) //for positive n
 // r * r * r >= n && n > (r + 1) * (r + 1) * (r + 1) //for negative n
 //
 // Adapted from code found in Hacker's Delight, fixed by Fabian Giessen
 // https://gist.github.com/729557
-func Crt(n int32) int32 {
+func Cbrt(n int32) int32 {
 	if n < 0 {
-		return -Crt(-n)
+		return -Cbrt(-n)
 	}
 	var b, r uint
 	x := uint(n)

@@ -1,25 +1,19 @@
-package intgr
+package i64
 
-// Crt returns the integer cube root of n. That is to say, the r such that:
+// Cbrt returns the integer cube root of n. That is to say, the r such that:
 //
 // r * r * r <= n && n < (r + 1) * (r + 1) * (r + 1) //for positive n
 // r * r * r >= n && n > (r + 1) * (r + 1) * (r + 1) //for negative n
 //
 // Adapted from code found in Hacker's Delight, fixed by Fabian Giessen
 // https://gist.github.com/729557
-func Crt(n int) int {
+func Cbrt(n int64) int64 {
 	if n < 0 {
-		return -Crt(-n)
+		return -Cbrt(-n)
 	}
-	var b, r uint
-	s := uint(1)
-	if s<<32 != 0 {
-		s = 63
-	} else {
-		s = 30
-	}
-	x := uint(n)
-	for ; s > 0; s -= 3 {
+	var b, r uint64
+	x := uint64(n)
+	for s := uint(63); s > 0; s -= 3 {
 		r <<= 1
 		b = 3*r*(r+1) + 1
 		if x>>s >= b {
@@ -32,5 +26,5 @@ func Crt(n int) int {
 	if x >= b {
 		r++
 	}
-	return int(r)
+	return int64(r)
 }

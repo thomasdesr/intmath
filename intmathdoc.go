@@ -38,7 +38,7 @@ functions have been implemented:
  Log2(n T) (r T)		// adapted from graphics.stanford.edu/~seander/bithacks.html
  Pow(x, y T) (r T)
  Sqrt(x T) (r T)		// adapted from Hacker's Delight
- Crt(n T) T		// adapted from Hacker's Delight
+ Cbrt(n T) T		// adapted from Hacker's Delight
  BitCount(v T) T		// adapted from Sonia Keys' library
  TrailingZeros(v T) T	// adapted from Sonia Key's library
  Is64bits() bool		// only for intgr and uint libraries, obviously
