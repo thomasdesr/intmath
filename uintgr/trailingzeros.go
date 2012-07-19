@@ -1,8 +1,8 @@
 package uintgr
 
 import (
-	"intmath/constants/c32"
-	"intmath/constants/c64"
+	"code.google.com/p/intmath/constants/c32"
+	"code.google.com/p/intmath/constants/c64"
 )
 
 // TrailingZeros returns the number of trailing 0 bits in v. If v is 0, it returns 0.

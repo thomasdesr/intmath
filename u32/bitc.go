@@ -1,7 +1,7 @@
 package u32
 
 import (
-	"intmath/constants/c32"
+	"code.google.com/p/intmath/constants/c32"
 )
 
 //Bitcount returns the number of set bits in v
