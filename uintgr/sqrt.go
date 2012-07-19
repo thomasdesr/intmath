@@ -1,28 +1,41 @@
 package uintgr
 
-// Sqrt returns the square root of x. Based on a C implementation of 
-// Newton's Method using bitshifting, originally found here:
-// http://www.codecodex.com/wiki/Calculate_an_integer_square_root#C
+// Sqrt returns the square root of x. 
+// Based on code found in Hacker's Delight (Addison-Wesley, 2003):
+// http://www.hackersdelight.org/
 func Sqrt(x uint) (r uint) {
-	// Check if int is 32 or 64 bits
-	// p starts at the highest power of four less or equal to x
-	p := uint(1)
-	if x<<32 == 0 {
-		p <<= 30
-	} else {
-		p <<= 62
+	//Fast way to make p highest power of 4 <= x
+	var b uint
+	p := x
+	if uint64(p) >= 1<<32 {
+		p >>= 32
+		b = 32
 	}
-	for p > x {
+	if p >= 1<<16 {
+		p >>= 16
+		b += 16
+	}
+	if p >= 1<<8 {
+		p >>= 8
+		b += 8
+	}
+	if p >= 1<<4 {
+		p >>= 4
+		b += 4
+	}
+	if p >= 1<<2 {
 		p >>= 2
+		b += 2
 	}
+	p = 1 << b
 
-	for p != 0 {
-		if x >= r+p {
-			x -= r + p
-			r += p << 1
-		}
+	for ; p != 0; p >>= 2 {
+		b = r | p
 		r >>= 1
-		p >>= 2
+		if x >= b {
+			x -= b
+			r |= p
+		}
 	}
 	return
 }

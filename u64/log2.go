@@ -6,11 +6,11 @@ func Log2(n uint64) uint64 {
 	// Using uint instead of uint64 is about 25% faster
 	// on x86 systems with the default Go compiler.
 	var r, v uint
-	if n >= 1<<32 {
-		r += 32
-		v = uint(n >> 32)
-	} else {
+	if n < 1<<32 {
 		v = uint(n)
+	} else {
+		r = 32
+		v = uint(n >> 32)
 	}
 	if v >= 1<<16 {
 		r += 16

@@ -8,18 +8,38 @@ func Sqrt(x int64) (r int64) {
 		return -1
 	}
 	// p starts at the highest power of four less or equal to x
-	p := int64(1 << 62)
-	for p > x {
-		p >>= 2
+	//Fast way to make p highest power of 4 <= x
+	var n uint
+	p := x
+	if p >= 1<<32 {
+		p >>= 32
+		n = 32
 	}
-
-	for p != 0 {
-		if x >= r+p {
-			x -= r + p
-			r += p << 1
-		}
-		r >>= 1
+	if p >= 1<<16 {
+		p >>= 16
+		n += 16
+	}
+	if p >= 1<<8 {
+		p >>= 8
+		n += 8
+	}
+	if p >= 1<<4 {
+		p >>= 4
+		n += 4
+	}
+	if p >= 1<<2 {
 		p >>= 2
+		n += 2
+	}
+	p = 1 << n
+	var b int64
+	for ; p != 0; p >>= 2 {
+		b = r | p
+		r >>= 1
+		if x >= b {
+			x -= b
+			r |= p
+		}
 	}
 	return
 }
