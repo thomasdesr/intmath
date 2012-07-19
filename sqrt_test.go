@@ -12,129 +12,141 @@ import (
 )
 
 func BenchmarkSqrtIntgr(b *testing.B) {
+	k := uint(1)
+	if k<<32 != 0 {
+		k = 32
+	} else {
+		k = 0
+	}
 	for i := 0; i < b.N; i++ {
-		for j := uint(0); j < 64; j++ {
-			_ = intgr.Sqrt(int(1) << j)
+		for j := 0x10000; j < 0x4000000; j += 0x10000 {
+			_ = intgr.Sqrt(j << k)
 		}
 	}
 }
 
 func BenchmarkSqrtUintgr(b *testing.B) {
+	k := uint(1)
+	if k<<32 != 0 {
+		k = 32
+	} else {
+		k = 0
+	}
 	for i := 0; i < b.N; i++ {
-		for j := uint(0); j < 64; j++ {
-			_ = uintgr.Sqrt(uint(1) << j)
+		for j := uint(0x10000); j < 0x4000000; j += 0x10000 {
+			_ = uintgr.Sqrt(j << k)
 		}
 	}
 }
 
 func BenchmarkSqrtInt32(b *testing.B) {
 	for i := 0; i < b.N; i++ {
-		for j := uint(0); j < 32; j++ {
-			_ = i32.Sqrt(int32(1) << j)
+		for j := int32(0x10000); j < 0x4000000; j += 0x10000 {
+			_ = i32.Sqrt(j)
 		}
 	}
 }
 
 func BenchmarkSqrtUint32(b *testing.B) {
 	for i := 0; i < b.N; i++ {
-		for j := uint(0); j < 32; j++ {
-			_ = u32.Sqrt(uint32(1) << j)
+		for j := uint32(0x10000); j < 0x4000000; j += 0x10000 {
+			_ = u32.Sqrt(j)
 		}
 	}
 }
 
 func BenchmarkSqrtShiftU32(b *testing.B) {
 	for i := 0; i < b.N; i++ {
-		for j := uint(0); j < 32; j++ {
-			_ = SqrtShiftU32(uint32(1) << j)
+		for j := uint32(0x10000); j < 0x4000000; j += 0x10000 {
+			_ = SqrtShiftU32(j)
 		}
 	}
 }
 
 func BenchmarkSqrtHDU32(b *testing.B) {
 	for i := 0; i < b.N; i++ {
-		for j := uint(0); j < 32; j++ {
-			_ = SqrtHDU32(uint32(1) << j)
+		for j := uint32(0x10000); j < 0x4000000; j += 0x10000 {
+			_ = SqrtHDU32(j)
 		}
 	}
 }
 
 func BenchmarkSqrtInt64(b *testing.B) {
 	for i := 0; i < b.N; i++ {
-		for j := uint(0); j < 64; j++ {
-			_ = i64.Sqrt(int64(1) << j)
+		for j := int64(0x1000000000000); j < 0x400000000000000; j += 0x1000000000000 {
+			_ = i64.Sqrt(j)
 		}
 	}
 }
 
 func BenchmarkSqrtUint64(b *testing.B) {
 	for i := 0; i < b.N; i++ {
-		for j := uint(0); j < 64; j++ {
-			_ = u64.Sqrt(uint64(1) << j)
+		for j := uint64(0x1000000000000); j < 0x400000000000000; j += 0x1000000000000 {
+			_ = u64.Sqrt(j)
 		}
 	}
 }
 
 func BenchmarkSqrtShiftU64(b *testing.B) {
 	for i := 0; i < b.N; i++ {
-		for j := uint(0); j < 64; j++ {
-			_ = SqrtShiftU64(uint64(1) << j)
+		for j := uint64(0x1000000000000); j < 0x400000000000000; j += 0x1000000000000 {
+			_ = SqrtShiftU64(j)
 		}
 	}
 }
 
 func BenchmarkSqrtHDU64(b *testing.B) {
 	for i := 0; i < b.N; i++ {
-		for j := uint(0); j < 64; j++ {
-			_ = SqrtHDU64(uint64(1) << j)
+		for j := uint64(0x1000000000000); j < 0x400000000000000; j += 0x1000000000000 {
+			_ = SqrtHDU64(j)
 		}
 	}
 }
 
 func BenchmarkSqrtFloat64ToIntgr(b *testing.B) {
 	for i := 0; i < b.N; i++ {
-		for j := uint(0); j < 64; j++ {
-			_ = int(math.Sqrt(float64(int(1) << j)))
+		for j := 0x10000; j < 0x4000000; j += 0x10000 {
+			_ = int(math.Sqrt(float64(j)))
 		}
 	}
 }
 
 func BenchmarkSqrtFloat64ToUintgr(b *testing.B) {
 	for i := 0; i < b.N; i++ {
-		for j := uint(0); j < 64; j++ {
-			_ = uint(math.Sqrt(float64(int(1) << j)))
+		for j := uint(0x10000); j < 0x4000000; j += 0x10000 {
+			_ = uint(math.Sqrt(float64(j)))
 		}
 	}
 }
 
 func BenchmarkSqrtFloat64ToInt32(b *testing.B) {
 	for i := 0; i < b.N; i++ {
-		for j := uint(0); j < 32; j++ {
-			_ = int32(math.Sqrt(float64(int32(1) << j)))
+		for j := int32(0x10000); j < 0x4000000; j += 0x10000 {
+			_ = int32(math.Sqrt(float64(j)))
 		}
 	}
 }
 
 func BenchmarkSqrtFloat64ToUint32(b *testing.B) {
 	for i := 0; i < b.N; i++ {
-		for j := uint(0); j < 32; j++ {
-			_ = int64(math.Sqrt(float64(uint(1) << j)))
+		for j := uint32(0x10000); j < 0x4000000; j += 0x10000 {
+			_ = int64(math.Sqrt(float64(j)))
 		}
 	}
 }
 
 func BenchmarkSqrtFloat64ToInt64(b *testing.B) {
 	for i := 0; i < b.N; i++ {
-		for j := uint(0); j < 64; j++ {
-			_ = int64(math.Sqrt(float64(int64(1) << j)))
+		for j := int64(0x1000000000000); j < 0x400000000000000; j += 0x1000000000000 {
+			_ = int64(math.Sqrt(float64(j)))
 		}
 	}
 }
 
 func BenchmarkSqrtFloat64ToUint64(b *testing.B) {
 	for i := 0; i < b.N; i++ {
-		for j := uint(0); j < 64; j++ {
-			_ = uint64(math.Sqrt(float64(uint64(1) << j)))
+		for j := uint64(0x1000000000000); j < 0x400000000000000; j += 0x1000000000000 {
+			_ = uint64(math.Sqrt(float64(j)))
 		}
 	}
 }
