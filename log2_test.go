@@ -22,10 +22,27 @@ import (
 // algorithm by 25%. The unnecessary cast on 64bit systems was 
 // considered worth the trade-off.
 
-func BenchmarkLog2Float64ToU64(b *testing.B) {
+func BenchmarkLog2NaiveU32(b *testing.B) {
 	for n := 0; n < b.N; n++ {
-		for i := uint64(1); i < 64; i++ {
-			_ = uint64(math.Log2(float64(uint64(1 << i))))
+		for i := uint32(1); i < 32; i++ {
+			_ = log2U32(1 << i)
+		}
+
+	}
+}
+
+func BenchmarkLog2U32(b *testing.B) {
+	for n := 0; n < b.N; n++ {
+		for i := uint32(1); i < 32; i++ {
+			_ = loopU32Log2(1 << i)
+		}
+	}
+}
+
+func BenchmarkLog2bitmaskU32(b *testing.B) {
+	for n := 0; n < b.N; n++ {
+		for i := uint32(1); i < 32; i++ {
+			_ = bitmaskU32Log2(1 << i)
 		}
 	}
 }
@@ -52,6 +69,56 @@ func BenchmarkLog2bitmaskU64(b *testing.B) {
 			_ = bitmaskU64Log2(1 << i)
 		}
 	}
+}
+
+func BenchmarkLog2Float64ToU64(b *testing.B) {
+	for n := 0; n < b.N; n++ {
+		for i := uint64(1); i < 64; i++ {
+			_ = uint64(math.Log2(float64(uint64(1 << i))))
+		}
+	}
+}
+
+func log2U32(n uint32) (r uint32) {
+	for n > 1 {
+		n >>= 1
+		r++
+	}
+	return
+}
+
+func loopU32Log2(n uint32) uint32 {
+	for i := uint32(25); i >= 0; i -= 8 {
+		if n>>i > 0 {
+			for ; ; i++ {
+				if n>>i == 1 {
+					return i
+				}
+			}
+		}
+	}
+	return 0
+}
+
+func bitmaskU32Log2(n uint32) (r uint32) {
+	if n >= 1<<16 {
+		r += 16
+		n >>= 16
+	}
+	if n >= 1<<8 {
+		r += 8
+		n >>= 8
+	}
+	if n >= 1<<4 {
+		r += 4
+		n >>= 4
+	}
+	if n >= 1<<2 {
+		r += 2
+		n >>= 2
+	}
+	r += n >> 1
+	return
 }
 
 func log2U64(n uint64) (r uint64) {
@@ -101,73 +168,6 @@ func bitmaskU64Log2(n uint64) uint64 {
 	}
 	r += v >> 1
 	return uint64(r)
-}
-
-func BenchmarkLog2NaiveU32(b *testing.B) {
-	for n := 0; n < b.N; n++ {
-		for i := uint32(1); i < 32; i++ {
-			_ = log2U32(1 << i)
-		}
-
-	}
-}
-
-func BenchmarkLog2U32(b *testing.B) {
-	for n := 0; n < b.N; n++ {
-		for i := uint32(1); i < 32; i++ {
-			_ = loopU32Log2(1 << i)
-		}
-	}
-}
-
-func BenchmarkLog2bitmaskU32(b *testing.B) {
-	for n := 0; n < b.N; n++ {
-		for i := uint32(1); i < 32; i++ {
-			_ = bitmaskU32Log2(1 << i)
-		}
-	}
-}
-
-func log2U32(n uint32) (r uint32) {
-	for n > 1 {
-		n >>= 1
-		r++
-	}
-	return
-}
-
-func loopU32Log2(n uint32) uint32 {
-	for i := uint32(25); i >= 0; i -= 8 {
-		if n>>i > 0 {
-			for ; ; i++ {
-				if n>>i == 1 {
-					return i
-				}
-			}
-		}
-	}
-	return 0
-}
-
-func bitmaskU32Log2(n uint32) (r uint32) {
-	if n >= 1<<16 {
-		r += 16
-		n >>= 16
-	}
-	if n >= 1<<8 {
-		r += 8
-		n >>= 8
-	}
-	if n >= 1<<4 {
-		r += 4
-		n >>= 4
-	}
-	if n >= 1<<2 {
-		r += 2
-		n >>= 2
-	}
-	r += n >> 1
-	return
 }
 
 // ====================================================
