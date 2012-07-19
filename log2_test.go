@@ -184,8 +184,9 @@ func TestLog2(t *testing.T) {
 	}
 	for i := uint(0); i < iMax; i++ {
 		for j := uint(0); j < i; j++ {
-			if intgr.Log2((1<<i)+(1<<j)) != int(i) {
-				t.Logf("intgr.Log2(%v) == %v\n", (1<<i)+(1<<j), intgr.Log2((1<<i)+(1<<j)))
+			k := int((1 << i) + (1 << j))
+			if intgr.Log2(k) != int(i) {
+				t.Logf("intgr.Log2(%v) == %v\n", k, intgr.Log2(k))
 				t.FailNow()
 			}
 		}
@@ -197,8 +198,9 @@ func TestLog2(t *testing.T) {
 
 	for i := uint(0); i < iMax; i++ {
 		for j := uint(0); j < i; j++ {
-			if uintgr.Log2((1<<i)+(1<<j)) != i {
-				t.Logf("intgr.Log2(%v) == %v\n", (1<<i)+(1<<j), uintgr.Log2((1<<i)+(1<<j)))
+			k := uint((1 << i) + (1 << j))
+			if uintgr.Log2(k) != i {
+				t.Logf("intgr.Log2(%v) == %v\n", k, uintgr.Log2(k))
 				t.Fail()
 			}
 		}
@@ -206,8 +208,9 @@ func TestLog2(t *testing.T) {
 
 	for i := uint32(0); i < uint32(31); i++ {
 		for j := uint32(0); j < i; j++ {
-			if i32.Log2((1<<i)+(1<<j)) != int32(i) {
-				t.Logf("i32.Log2(%v) == %v\n", (1<<i)+(1<<j), i32.Log2((1<<i)+(1<<j)))
+			k := int32((1 << i) + (1 << j))
+			if i32.Log2(k) != int32(i) {
+				t.Logf("i32.Log2(%v) == %v\n", k, i32.Log2(k))
 				t.FailNow()
 			}
 		}
@@ -219,8 +222,9 @@ func TestLog2(t *testing.T) {
 
 	for i := uint32(0); i < uint32(31); i++ {
 		for j := uint32(0); j < i; j++ {
-			if u32.Log2((1<<i)+(1<<j)) != i {
-				t.Logf("u32.Log2(%v) == %v\n", (1<<i)+(1<<j), u32.Log2((1<<i)+(1<<j)))
+			k := uint32((1 << i) + (1 << j))
+			if u32.Log2(k) != i {
+				t.Logf("u32.Log2(%v) == %v\n", k, u32.Log2(k))
 				t.FailNow()
 			}
 		}
@@ -228,8 +232,9 @@ func TestLog2(t *testing.T) {
 
 	for i := uint64(0); i < uint64(63); i++ {
 		for j := uint64(0); j < i; j++ {
-			if i64.Log2((1<<i)+(1<<j)) != int64(i) {
-				t.Logf("i64.Log2(%v) == %v\n", (1<<i)+(1<<j), i64.Log2((1<<i)+(1<<j)))
+			k := int64((1 << i) + (1 << j))
+			if i64.Log2(k) != int64(i) {
+				t.Logf("i64.Log2(%v) == %v\n", k, i64.Log2(k))
 				t.FailNow()
 			}
 		}
@@ -241,8 +246,9 @@ func TestLog2(t *testing.T) {
 
 	for i := uint64(0); i < uint64(63); i++ {
 		for j := uint64(0); j < i; j++ {
-			if u64.Log2((1<<i)+(1<<j)) != i {
-				t.Logf("u64.Log2(%v) == %v\n", (1<<i)+(1<<j), u64.Log2((1<<i)+(1<<j)))
+			k := uint64((1 << i) + (1 << j))
+			if u64.Log2(k) != i {
+				t.Logf("u64.Log2(%v) == %v\n", k, u64.Log2(k))
 				t.FailNow()
 			}
 		}

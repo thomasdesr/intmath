@@ -6,7 +6,7 @@ func Log10(n uint) uint {
 	// we might as well turn it into an optimisation.
 	if v := uint64(n) & 0xFFFFFFFF00000000; v != 0 {
 		switch {
-		case v >= 10000000000000900000:
+		case v >= 10000000000000000000:
 			return 19
 		case v >= 1000000000000000000:
 			return 18

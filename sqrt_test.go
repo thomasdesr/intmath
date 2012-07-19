@@ -1,12 +1,12 @@
 package intmath
 
 import (
-	"code.google.com/p/intmath/i32"
-	"code.google.com/p/intmath/i64"
-	"code.google.com/p/intmath/intgr"
-	"code.google.com/p/intmath/u32"
-	"code.google.com/p/intmath/u64"
-	"code.google.com/p/intmath/uintgr"
+	"intmath/i32"
+	"intmath/i64"
+	"intmath/intgr"
+	"intmath/u32"
+	"intmath/u64"
+	"intmath/uintgr"
 	"math"
 	"testing"
 )
@@ -19,26 +19,10 @@ func BenchmarkSqrtIntgr(b *testing.B) {
 	}
 }
 
-func BenchmarkSqrtFloat64ToIntgr(b *testing.B) {
+func BenchmarkSqrtUintgr(b *testing.B) {
 	for i := 0; i < b.N; i++ {
 		for j := uint(0); j < 64; j++ {
-			_ = int(math.Sqrt(float64(int(1) << j)))
-		}
-	}
-}
-
-func BenchmarkSqrtInt64(b *testing.B) {
-	for i := 0; i < b.N; i++ {
-		for j := uint(0); j < 64; j++ {
-			_ = i64.Sqrt(int64(1) << j)
-		}
-	}
-}
-
-func BenchmarkSqrtFloat64ToInt64(b *testing.B) {
-	for i := 0; i < b.N; i++ {
-		for j := uint(0); j < 64; j++ {
-			_ = int64(math.Sqrt(float64(int64(1) << j)))
+			_ = uintgr.Sqrt(uint(1) << j)
 		}
 	}
 }
@@ -51,10 +35,34 @@ func BenchmarkSqrtInt32(b *testing.B) {
 	}
 }
 
-func BenchmarkSqrtFloat64ToInt32(b *testing.B) {
+func BenchmarkSqrtUint32(b *testing.B) {
 	for i := 0; i < b.N; i++ {
 		for j := uint(0); j < 32; j++ {
-			_ = int32(math.Sqrt(float64(int32(1) << j)))
+			_ = u32.Sqrt(uint32(1) << j)
+		}
+	}
+}
+
+func BenchmarkSqrtShiftU32(b *testing.B) {
+	for i := 0; i < b.N; i++ {
+		for j := uint(0); j < 32; j++ {
+			_ = SqrtShiftU32(uint32(1) << j)
+		}
+	}
+}
+
+func BenchmarkSqrtHDU32(b *testing.B) {
+	for i := 0; i < b.N; i++ {
+		for j := uint(0); j < 32; j++ {
+			_ = SqrtHDU32(uint32(1) << j)
+		}
+	}
+}
+
+func BenchmarkSqrtInt64(b *testing.B) {
+	for i := 0; i < b.N; i++ {
+		for j := uint(0); j < 64; j++ {
+			_ = i64.Sqrt(int64(1) << j)
 		}
 	}
 }
@@ -67,18 +75,42 @@ func BenchmarkSqrtUint64(b *testing.B) {
 	}
 }
 
-func BenchmarkSqrtFloat64ToUint64(b *testing.B) {
+func BenchmarkSqrtShiftU64(b *testing.B) {
 	for i := 0; i < b.N; i++ {
 		for j := uint(0); j < 64; j++ {
-			_ = uint64(math.Sqrt(float64(uint64(1) << j)))
+			_ = SqrtShiftU64(uint64(1) << j)
 		}
 	}
 }
 
-func BenchmarkSqrtUint32(b *testing.B) {
+func BenchmarkSqrtHDU64(b *testing.B) {
+	for i := 0; i < b.N; i++ {
+		for j := uint(0); j < 64; j++ {
+			_ = SqrtHDU64(uint64(1) << j)
+		}
+	}
+}
+
+func BenchmarkSqrtFloat64ToIntgr(b *testing.B) {
+	for i := 0; i < b.N; i++ {
+		for j := uint(0); j < 64; j++ {
+			_ = int(math.Sqrt(float64(int(1) << j)))
+		}
+	}
+}
+
+func BenchmarkSqrtFloat64ToUintgr(b *testing.B) {
+	for i := 0; i < b.N; i++ {
+		for j := uint(0); j < 64; j++ {
+			_ = uint(math.Sqrt(float64(int(1) << j)))
+		}
+	}
+}
+
+func BenchmarkSqrtFloat64ToInt32(b *testing.B) {
 	for i := 0; i < b.N; i++ {
 		for j := uint(0); j < 32; j++ {
-			_ = u32.Sqrt(uint32(1) << j)
+			_ = int32(math.Sqrt(float64(int32(1) << j)))
 		}
 	}
 }
@@ -89,6 +121,130 @@ func BenchmarkSqrtFloat64ToUint32(b *testing.B) {
 			_ = int64(math.Sqrt(float64(uint(1) << j)))
 		}
 	}
+}
+
+func BenchmarkSqrtFloat64ToInt64(b *testing.B) {
+	for i := 0; i < b.N; i++ {
+		for j := uint(0); j < 64; j++ {
+			_ = int64(math.Sqrt(float64(int64(1) << j)))
+		}
+	}
+}
+
+func BenchmarkSqrtFloat64ToUint64(b *testing.B) {
+	for i := 0; i < b.N; i++ {
+		for j := uint(0); j < 64; j++ {
+			_ = uint64(math.Sqrt(float64(uint64(1) << j)))
+		}
+	}
+}
+
+func SqrtShiftU64(x uint64) uint64 {
+	// The highest set bit of the square root of x is equal to
+	// log2(x)/2, and always fits in a 32bit word. Using uint 
+	// instead of uint64 guarantees native word width, which 
+	// is 7/4 faster on my 32bit netbook.
+	r := uint(1 << (u64.Log2(x) >> 1))
+	s := r >> 1
+	t := r + s
+	for s > 0 {
+		if uint64(t)*uint64(t) <= x {
+			r = t
+		}
+		s >>= 1
+		t = r + s
+	}
+	return uint64(r)
+}
+
+func SqrtShiftU32(x uint32) uint32 {
+	r := uint(1 << (u32.Log2(x) >> 1))
+	s := r >> 1
+	t := r + s
+	for s > 0 {
+		if t*t <= uint(x) {
+			r = t
+		}
+		s >>= 1
+		t = r + s
+	}
+	return uint32(r)
+}
+
+func SqrtHDU64(x uint64) uint64 {
+	var b, r uint64
+	//p highest power of 4 equal or less to x 
+	//p := uint64(1 << ((uint(u64.Log2(x)) >> 1) << 1))
+	p := x
+	var n, v uint
+	if p < 1<<32 {
+		v = uint(p)
+	} else {
+		v = uint(p >> 32)
+		n = 32
+	}
+
+	if v >= 1<<16 {
+		v >>= 16
+		n += 16
+	}
+	if v >= 1<<8 {
+		v >>= 8
+		n += 8
+	}
+	if v >= 1<<4 {
+		v >>= 4
+		n += 4
+	}
+	if v >= 1<<2 {
+		v >>= 2
+		n += 2
+	}
+	p = 1 << n
+
+	for ; p != 0; p >>= 2 {
+		b = r | p
+		r >>= 1
+		if x >= b {
+			x -= b
+			r |= p
+		}
+	}
+	return r
+}
+
+func SqrtHDU32(x uint32) uint32 {
+	//Using uint guarantees native word width
+	var b, r uint
+	t := uint(x)
+	//Fast way to make p highest power of 4 <= x
+	p := t
+	if p >= 1<<16 {
+		p >>= 16
+		b = 16
+	}
+	if p >= 1<<8 {
+		p >>= 8
+		b += 8
+	}
+	if p >= 1<<4 {
+		p >>= 4
+		b += 4
+	}
+	if p >= 1<<2 {
+		p >>= 2
+		b += 2
+	}
+	p = 1 << b
+	for ; p != 0; p >>= 2 {
+		b = r | p
+		r >>= 1
+		if t >= b {
+			t -= b
+			r |= p
+		}
+	}
+	return uint32(r)
 }
 
 func TestSqrt(t *testing.T) {
@@ -141,6 +297,32 @@ func TestSqrt(t *testing.T) {
 	for i := u64Max; i > 0; i >>= 1 {
 		if u64.Sqrt(i*i) != i {
 			t.Logf("u64.Sqrt(%X*%X) == %X\n", i, i, u64.Sqrt(i))
+			t.Fail()
+		}
+	}
+
+	for i := u32Max; i > 0; i >>= 1 {
+		if SqrtShiftU32(i*i) != i {
+			t.Logf("SqrtShiftU32(%X*%X) == %X\n", i, i, SqrtShiftU32(i*i))
+			t.Fail()
+		}
+	}
+	for i := u64Max; i > 0; i >>= 1 {
+		if SqrtShiftU64(i*i) != i {
+			t.Logf("SqrtShiftU64(%X*%X) == %X\n", i, i, SqrtShiftU64(i*i))
+			t.Fail()
+		}
+	}
+
+	for i := u32Max; i > 0; i >>= 1 {
+		if SqrtHDU32(i*i) != i {
+			t.Logf("SqrtHDU32(%X*%X) == %X\n", i, i, SqrtHDU32(i*i))
+			t.Fail()
+		}
+	}
+	for i := u64Max; i > 0; i >>= 1 {
+		if SqrtHDU64(i*i) != i {
+			t.Logf("SqrtHDU64(%X*%X) == %X\n", i, i, SqrtHDU64(i*i))
 			t.Fail()
 		}
 	}
