@@ -1,7 +1,7 @@
 package u64
 
 import (
-	"intmath/constants/c64"
+	"code.google.com/p/intmath/constants/c64"
 )
 
 //Bitcount returns the number of set bits in v

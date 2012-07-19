@@ -1,7 +1,7 @@
 package i32
 
 import (
-	"intmath/constants/c32"
+	"code.google.com/p/intmath/constants/c32"
 )
 
 // TrailingZeros returns a byte with the number of trailing 0 bits in v. 
