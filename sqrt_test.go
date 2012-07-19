@@ -1,12 +1,12 @@
 package intmath
 
 import (
-	"intmath/i32"
-	"intmath/i64"
-	"intmath/intgr"
-	"intmath/u32"
-	"intmath/u64"
-	"intmath/uintgr"
+	"code.google.com/p/intmath/i32"
+	"code.google.com/p/intmath/i64"
+	"code.google.com/p/intmath/intgr"
+	"code.google.com/p/intmath/u32"
+	"code.google.com/p/intmath/u64"
+	"code.google.com/p/intmath/uintgr"
 	"math"
 	"testing"
 )
