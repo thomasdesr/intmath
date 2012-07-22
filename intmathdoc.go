@@ -75,7 +75,7 @@ actually benefits form this library. To do this run go test:
 
  go test code.google.com/p/intmath -test.bench="Benchmark*"
 
-Some benchmarks also include lternate implementations for
+Some benchmarks also include alternate implementations for
 different functions. These might just be more effective on your 
 architecture.
 */

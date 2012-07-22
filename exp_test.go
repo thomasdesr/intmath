@@ -12,7 +12,7 @@ import (
 )
 
 // ===============================================
-// ==== Benchmarking different Epx algorithms ====
+// ==== Benchmarking different Exp algorithms ====
 // ===============================================
 
 // Using i64 package's simple exp function
