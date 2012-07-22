@@ -2,11 +2,11 @@ package intgr
 
 // Pow returns x**y, the base-x exponential of y.
 func Pow(x, y int) (r int) {
-	if x == 0 || y < 0 {
+	if x == r || y < r {
 		return
 	}
 	r = 1
-	if x == 1 || y == 0 {
+	if x == r {
 		return
 	}
 	if x < 0 {
