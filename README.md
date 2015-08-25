@@ -18,7 +18,7 @@ The root intmath package is only used for godoc documentation, and testing and b
     package main
 
     import (
-        "github.com/thomaso-mirodin/intmath"
+        "github.com/thomaso-mirodin/intmath/intgr"
     )
 
     func main() {
