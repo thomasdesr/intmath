@@ -7,9 +7,12 @@ This library extends the Go math library with math packages for the int, uint, i
 Note that the dedicated FPU in your computer can be so fast that casting to and from float64 would be faster than using integer math for certain operations (most notably calculating the square root).
 
 ## Installing
-    go get code.google.com/p/intmath/
+    go get github.com/thomaso-mirodin/intmath/
 
 ## Usage
+
+[![GoDoc](https://godoc.org/ggithub.com/thomaso-mirodin/intmath?status.svg)](https://godoc.org/github.com/thomaso-mirodin/intmath)
+
 The root intmath package is only used for godoc documentation, and testing and benchmarking. Import the relevant sub-package to use math functions tailored to the type of choice:
 
     package main
