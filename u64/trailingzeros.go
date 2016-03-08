@@ -1,7 +1,7 @@
 package u64
 
 import (
-	"code.google.com/p/intmath/constants/c64"
+	"github.com/thomaso-mirodin/intmath/constants/c64"
 )
 
 // TrailingZeros returns the number of trailing 0 bits in v. If v is 0, it returns 0.
