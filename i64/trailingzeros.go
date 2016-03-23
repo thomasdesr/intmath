@@ -1,10 +1,10 @@
 package i64
 
 import (
-	"code.google.com/p/intmath/constants/c64"
+	"github.com/thomaso-mirodin/intmath/constants/c64"
 )
 
-// TrailingZeros returns a byte with the number of trailing 0 bits in v. 
+// TrailingZeros returns a byte with the number of trailing 0 bits in v.
 // Remember that Go represents negative integers in two's complement.
 // If v is 0, it returns 0.
 func TrailingZeros(v int64) int64 {
